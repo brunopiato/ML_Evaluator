@@ -39,8 +39,8 @@ st.set_page_config(page_title='Classification Models',
                    page_icon='🤖',
                    layout='wide')
 
-tab1, tab2, tab3, tab4 = st.tabs(
-    ["K-Nearest Neighbors", "Decision Tree", "Random Forest", "Logistic Regression"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(
+    ["K-Nearest Neighbors", "Decision Tree", "Random Forest", "Logistic Regression", "Model Comparison"])
 
 
 # -------------- Sidebar --------------------
@@ -560,3 +560,16 @@ with tab4:
                 test_plot.update_yaxes(range=[0.5, 1.0])
                 test_plot.update_layout(showlegend=False)
                 st.plotly_chart(test_plot, use_container_width=True)
+
+# ---------------------------------------------------------------
+# --------------------- Model Comparison ---------------------
+# ---------------------------------------------------------------
+with tab5:
+    st.header('K-Nearest Neighbors')
+    st.table(knn_results.T)
+    st.header('Decision Trees')
+    st.table(dt_results.T)
+    st.header('Random Forest')
+    st.table(rf_results.T)
+    st.header('Logistic Regression')
+    st.table(logreg_results.T)
