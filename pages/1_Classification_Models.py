@@ -15,16 +15,13 @@ from sklearn import neighbors as nb
 from sklearn import tree as tr
 from sklearn import ensemble as en
 
-from my_func import classif_functions as classif
+import utils.classif_functions as classif
 
 # Loading data
 # X data
-X_train_cla = pd.read_csv(
-    './data/classif/X_training.csv', low_memory=False)
-X_test_cla = pd.read_csv(
-    './data/classif/X_test.csv', low_memory=False)
-X_val_cla = pd.read_csv(
-    './data/classif/X_validation.csv', low_memory=False)
+X_train_cla = pd.read_csv('./data/classif/X_training.csv', low_memory=False)
+X_test_cla = pd.read_csv('./data/classif/X_test.csv', low_memory=False)
+X_val_cla = pd.read_csv('./data/classif/X_validation.csv', low_memory=False)
 
 # y data
 y_train_cla = np.ravel(pd.read_csv(
@@ -203,7 +200,6 @@ with tab2:
                                      y_val=y_val_cla,
                                      y_test=y_test_cla,
                                      mdepth=m_treedepth)
-    st.table(dt_results)
 
     # -------------- Printing in the page --------------------
     with st.container():
@@ -241,7 +237,7 @@ with tab2:
                                     labels={'x': '', 'y': ''},
                                     template='plotly_dark',
                                     hover_name=dt_results.index)
-                train_plot.update_yaxes(range=[0.75, 1.0])
+                train_plot.update_yaxes(range=[0.5, 1.0])
                 train_plot.update_layout(showlegend=False)
                 st.plotly_chart(train_plot, use_container_width=True)
 
@@ -269,7 +265,7 @@ with tab2:
                                   labels={'x': '', 'y': ''},
                                   template='plotly_dark',
                                   hover_name=dt_results.index)
-                val_plot.update_yaxes(range=[0.75, 1.0])
+                val_plot.update_yaxes(range=[0.5, 1.0])
                 val_plot.update_layout(showlegend=False)
                 st.plotly_chart(val_plot, use_container_width=True)
 
@@ -297,7 +293,7 @@ with tab2:
                                    labels={'x': '', 'y': ''},
                                    template='plotly_dark',
                                    hover_name=dt_results.index)
-                test_plot.update_yaxes(range=[0.75, 1.0])
+                test_plot.update_yaxes(range=[0.5, 1.0])
                 test_plot.update_layout(showlegend=False)
                 st.plotly_chart(test_plot, use_container_width=True)
 
@@ -370,7 +366,7 @@ with tab3:
                                     labels={'x': '', 'y': ''},
                                     template='plotly_dark',
                                     hover_name=rf_results.index)
-                train_plot.update_yaxes(range=[0.75, 1.0])
+                train_plot.update_yaxes(range=[0.5, 1.0])
                 train_plot.update_layout(showlegend=False)
                 st.plotly_chart(train_plot, use_container_width=True)
 
@@ -398,7 +394,7 @@ with tab3:
                                   labels={'x': '', 'y': ''},
                                   template='plotly_dark',
                                   hover_name=rf_results.index)
-                val_plot.update_yaxes(range=[0.75, 1.0])
+                val_plot.update_yaxes(range=[0.5, 1.0])
                 val_plot.update_layout(showlegend=False)
                 st.plotly_chart(val_plot, use_container_width=True)
 
@@ -426,7 +422,7 @@ with tab3:
                                    labels={'x': '', 'y': ''},
                                    template='plotly_dark',
                                    hover_name=rf_results.index)
-                test_plot.update_yaxes(range=[0.75, 1.0])
+                test_plot.update_yaxes(range=[0.5, 1.0])
                 test_plot.update_layout(showlegend=False)
                 st.plotly_chart(test_plot, use_container_width=True)
 
