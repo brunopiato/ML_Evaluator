@@ -40,7 +40,7 @@ st.markdown("""
 
             At the last tab of each page there is a model comparison of the algorithms as the user set them. 
             
-            As all the algorithms are rerun every time the user changes a hyperparameter, it can time a little to the results be shown, so please, be patient. 
+            As all the algorithms are rerun every time the user changes a hyperparameter, it can take a little long to the results be correctly displayed, so please, be patient. 
             
             If you have any question, suggestion, issue report and critics, please let me know by reaching me through [e-mail](mailto:piatobio@gmail.com) or by [Discord](https://discordapp.com/users/438408418429239296).
             """)
