@@ -20,19 +20,19 @@ from my_func import classif_functions as classif
 # Loading data
 # X data
 X_train_cla = pd.read_csv(
-    '~/repos/Fundamentos_ML/Essay/Classification/X_training.csv', low_memory=False)
+    './data/classif/X_training.csv', low_memory=False)
 X_test_cla = pd.read_csv(
-    '~/repos/Fundamentos_ML/Essay/Classification/X_test.csv', low_memory=False)
+    './data/classif/X_test.csv', low_memory=False)
 X_val_cla = pd.read_csv(
-    '~/repos/Fundamentos_ML/Essay/Classification/X_validation.csv', low_memory=False)
+    './data/classif/X_validation.csv', low_memory=False)
 
 # y data
 y_train_cla = np.ravel(pd.read_csv(
-    '~/repos/Fundamentos_ML/Essay/Classification/y_training.csv', low_memory=False))
+    './data/classif/y_training.csv', low_memory=False))
 y_test_cla = np.ravel(pd.read_csv(
-    '~/repos/Fundamentos_ML/Essay/Classification/y_test.csv', low_memory=False))
+    './data/classif/y_test.csv', low_memory=False))
 y_val_cla = np.ravel(pd.read_csv(
-    '~/repos/Fundamentos_ML/Essay/Classification/y_validation.csv', low_memory=False))
+    './data/classif/y_validation.csv', low_memory=False))
 
 
 ##########################################################################################################
