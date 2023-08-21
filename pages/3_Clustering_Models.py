@@ -14,7 +14,7 @@ st.set_page_config(page_title='Clustering Models',
 
 # -------------- Sidebar --------------------
 st.sidebar.markdown('# Clustering Models Evaluation')
-
+st.sidebar.markdown('#### by Bruno Piato')
 
 # -------------- Body --------------------
 

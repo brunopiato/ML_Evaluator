@@ -14,7 +14,7 @@ st.set_page_config(page_title='Regression Models',
 
 # -------------- Sidebar --------------------
 st.sidebar.markdown('# Regression Models Evaluation')
-
+st.sidebar.markdown('#### by Bruno Piato')
 
 # -------------- Body --------------------
 tab1, tab2, tab3, tab4, tab5 = st.tabs(

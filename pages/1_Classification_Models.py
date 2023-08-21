@@ -45,7 +45,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(
 
 # -------------- Sidebar --------------------
 st.sidebar.markdown('# Classification Models Evaluation Tool')
-
+st.sidebar.markdown('#### by Bruno Piato')
 
 # ---------------------------------------------------------------
 # --------------------- K-Nearest Neighbors ---------------------
