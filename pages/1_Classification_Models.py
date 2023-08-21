@@ -53,8 +53,9 @@ st.sidebar.markdown('# Classification Models Evaluation Tool')
 with tab1:
     st.header("K-Nearest Neighbors Evaluator")
 
-    expander = st.expander('How does a K-Nearest Neighbors Classifier work?')
-    expander.write("""
+    expander_knn = st.expander(
+        'How does a K-Nearest Neighbors Classifier work?')
+    expander_knn.write("""
                 This is a K-Nearest Neighbors Classifier algorithm
                """)
     colA, colB = st.columns(2)
@@ -179,8 +180,8 @@ with tab1:
 with tab2:
     st.header("Decision Tree Evaluator")
 
-    expander = st.expander('How does a Decision Tree Classifier work?')
-    expander.write("""
+    expander_dt = st.expander('How does a Decision Tree Classifier work?')
+    expander_dt.write("""
                 This is a Decision Tree Classifier algorithm
                """)
     colA, colB = st.columns(2)
@@ -304,8 +305,8 @@ with tab2:
 with tab3:
     st.header("Random Forest Classifier evaluator")
 
-    expander = st.expander('How does a Random Forest Classifier work?')
-    expander.write("""
+    expander_rf = st.expander('How does a Random Forest Classifier work?')
+    expander_rf.write("""
                 This is a Random Forest Classifier algorithm
                """)
     colA, colB = st.columns(2)
@@ -433,8 +434,9 @@ with tab3:
 with tab4:
     st.header('Logistic Regression Evaluator')
 
-    expander = st.expander('How does a Logistic Regression Classifier work?')
-    expander.write("""
+    expander_logreg = st.expander(
+        'How does a Logistic Regression Classifier work?')
+    expander_logreg.write("""
                 This is a Logistic Regression Classifier algorithm
                """)
 
@@ -565,6 +567,31 @@ with tab4:
 # --------------------- Model Comparison ---------------------
 # ---------------------------------------------------------------
 with tab5:
+    expander_metrics = st.expander("Whats does these metrics mean?")
+    expander_metrics.write(r"""
+                           **Precision**: is the percentage of correct predictions of a certain classe an algorithm made given the number of times it predicted that class. Based on the Confusion Matrix it is the number of True Positives (TP) in relation to the number of Positives (both True and False, TP and FP). 
+                           
+                           $Precision = TP/TP+FP$
+                           
+                           ---
+                           
+                           **Accuracy**: is the percentage of correct predictions an algorithm made given all predictions it made. Based on the Confusion Matrix it is the True Negative (TN) plus the True Positive(TP) in relation to the number os predictions the algorithm made. Its simply the percentage of right predictions. It may be misleading when classes are unbalanced.
+                           
+                           $Accuracy = TP+TF/Predictions$
+                           
+                           ---
+                           
+                           **Recall**: is the percentage of a certain class that the algorithm successfully identified as such. Based on the Confusion Matrix it is the number of True Positives (TP) in relation to the number of True Positives (right identifications, TP) plus the number of False Negatives (wrong identifications, FN).
+                           
+                           $Recall = TP/TP+FN$
+                           
+                           ---
+                           
+                           **F1-Score**: is a way the gather both Precision and Recall in a single metric given the Precision-Recall trade-off. It is the harmonic mean between these two metrics weighting relatively more the metric with lowest value.
+                           
+                           $F1Score = \frac{2}{\frac{1}{Precision} + \frac{1}{Recall}}$
+                           """)
+
     st.header('K-Nearest Neighbors')
     st.table(knn_results.T)
     st.header('Decision Trees')
