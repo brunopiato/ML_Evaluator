@@ -23,6 +23,20 @@ X_train_cla = pd.read_csv('./data/classif/X_training.csv', low_memory=False)
 X_test_cla = pd.read_csv('./data/classif/X_test.csv', low_memory=False)
 X_val_cla = pd.read_csv('./data/classif/X_validation.csv', low_memory=False)
 
+# Removing ID Column
+selected_features = ['customer_type', 'age', 'class', 'flight_distance',
+                     'inflight_wifi_service', 'departure_arrival_time_convenient',
+                     'ease_of_online_booking', 'gate_location', 'food_and_drink',
+                     'online_boarding', 'seat_comfort', 'inflight_entertainment',
+                     'on_board_service', 'leg_room_service', 'baggage_handling',
+                     'checkin_service', 'inflight_service', 'departure_delay_in_minutes',
+                     'arrival_delay_in_minutes', 'gender_Female', 'gender_Male',
+                     'type_of_travel_personal_travel']
+
+X_train_cla = X_train_cla[selected_features]
+X_test_cla = X_test_cla[selected_features]
+X_val_cla = X_val_cla[selected_features]
+
 # y data
 y_train_cla = np.ravel(pd.read_csv(
     './data/classif/y_training.csv', low_memory=False))
