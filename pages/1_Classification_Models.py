@@ -46,6 +46,39 @@ y_val_cla = np.ravel(pd.read_csv(
     './data/classif/y_validation.csv', low_memory=False))
 
 
+# Loading plottings datasets
+# KNN
+results_train_knn = pd.read_csv(
+    './data/classif/results/knn_results_train.csv', low_memory=False, index_col=0)
+results_val_knn = pd.read_csv(
+    './data/classif/results/knn_results_validation.csv', low_memory=False, index_col=0)
+results_test_knn = pd.read_csv(
+    './data/classif/results/knn_results_test.csv', low_memory=False, index_col=0)
+
+# Decision tree
+results_train_dt = pd.read_csv(
+    './data/classif/results/dt_results_train.csv', low_memory=False, index_col=0)
+results_val_dt = pd.read_csv(
+    './data/classif/results/dt_results_validation.csv', low_memory=False, index_col=0)
+results_test_dt = pd.read_csv(
+    './data/classif/results/dt_results_test.csv', low_memory=False, index_col=0)
+
+# Random Forest
+results_train_rf = pd.read_csv(
+    './data/classif/results/rf_results_train.csv', low_memory=False, index_col=0)
+results_val_rf = pd.read_csv(
+    './data/classif/results/rf_results_validation.csv', low_memory=False, index_col=0)
+results_test_rf = pd.read_csv(
+    './data/classif/results/rf_results_test.csv', low_memory=False, index_col=0)
+
+# Logistic Regression
+results_train_logreg = pd.read_csv(
+    './data/classif/results/logreg_results_train.csv', low_memory=False, index_col=0)
+results_val_logreg = pd.read_csv(
+    './data/classif/results/logreg_results_validation.csv', low_memory=False, index_col=0)
+results_test_logreg = pd.read_csv(
+    './data/classif/results/logreg_results_test.csv', low_memory=False, index_col=0)
+
 ##########################################################################################################
 #################################### STREAMLIT PAGE ######################################################
 ##########################################################################################################
@@ -123,7 +156,6 @@ with tab1:
                 train_plot = px.bar(x=knn_results.index,
                                     y=knn_results['Train'],
                                     color=knn_results.index,
-                                    barmode='overlay',
                                     labels={'x': '', 'y': ''},
                                     template='plotly_dark',
                                     hover_name=knn_results.index)
@@ -151,7 +183,6 @@ with tab1:
                 val_plot = px.bar(x=knn_results.index,
                                   y=knn_results['Validation'],
                                   color=knn_results.index,
-                                  barmode='overlay',
                                   labels={'x': '', 'y': ''},
                                   template='plotly_dark',
                                   hover_name=knn_results.index)
@@ -179,13 +210,42 @@ with tab1:
                 test_plot = px.bar(x=knn_results.index,
                                    y=knn_results['Test'],
                                    color=knn_results.index,
-                                   barmode='overlay',
                                    labels={'x': '', 'y': ''},
                                    template='plotly_dark',
                                    hover_name=knn_results.index)
                 test_plot.update_yaxes(range=[0.5, 1.0])
                 test_plot.update_layout(showlegend=False)
                 st.plotly_chart(test_plot, use_container_width=True)
+
+    with st.container():
+        col18, col19, col20 = st.columns(3)
+        with col18:
+            knn_plot_train = px.line(results_train_knn,
+                                     x=results_train_knn.index,
+                                     y=['precision', 'accuracy', 'recall', 'F1'],
+                                     template='plotly_dark',
+                                     title="Metrics comparison according to the K-value - Train Dataset",
+                                     labels={'value': 'Metric value',
+                                             'index': 'K-Value'}).update_layout(legend=dict(title="Metrics"))
+            st.plotly_chart(knn_plot_train, use_container_width=True)
+        with col19:
+            knn_plot_val = px.line(results_val_knn,
+                                   x=results_val_knn.index,
+                                   y=['precision', 'accuracy', 'recall', 'F1'],
+                                   template='plotly_dark',
+                                   title="Metrics comparison according to the K-value - Validation Dataset",
+                                   labels={'value': 'Metric value',
+                                           'index': 'K-Value'}).update_layout(legend=dict(title="Metrics"))
+            st.plotly_chart(knn_plot_val, use_container_width=True)
+        with col20:
+            knn_plot_test = px.line(results_test_knn,
+                                    x=results_test_knn.index,
+                                    y=['precision', 'accuracy', 'recall', 'F1'],
+                                    template='plotly_dark',
+                                    title="Metrics comparison according to the K-value - Test Dataset",
+                                    labels={'value': 'Metric value',
+                                            'index': 'K-Value'}).update_layout(legend=dict(title="Metrics"))
+            st.plotly_chart(knn_plot_test, use_container_width=True)
 
 
 # ---------------------------------------------------------------
@@ -248,7 +308,6 @@ with tab2:
                 train_plot = px.bar(x=dt_results.index,
                                     y=dt_results['Train'],
                                     color=dt_results.index,
-                                    barmode='overlay',
                                     labels={'x': '', 'y': ''},
                                     template='plotly_dark',
                                     hover_name=dt_results.index)
@@ -276,7 +335,6 @@ with tab2:
                 val_plot = px.bar(x=dt_results.index,
                                   y=dt_results['Validation'],
                                   color=dt_results.index,
-                                  barmode='overlay',
                                   labels={'x': '', 'y': ''},
                                   template='plotly_dark',
                                   hover_name=dt_results.index)
@@ -304,13 +362,42 @@ with tab2:
                 test_plot = px.bar(x=dt_results.index,
                                    y=dt_results['Test'],
                                    color=dt_results.index,
-                                   barmode='overlay',
                                    labels={'x': '', 'y': ''},
                                    template='plotly_dark',
                                    hover_name=dt_results.index)
                 test_plot.update_yaxes(range=[0.5, 1.0])
                 test_plot.update_layout(showlegend=False)
                 st.plotly_chart(test_plot, use_container_width=True)
+
+    with st.container():
+        col18, col19, col20 = st.columns(3)
+        with col18:
+            dt_plot_train = px.line(results_train_dt,
+                                    x=results_train_dt.index,
+                                    y=['precision', 'accuracy', 'recall', 'F1'],
+                                    template='plotly_dark',
+                                    title="Metrics comparison according to the max_depth - Train Dataset",
+                                    labels={'value': 'Metric value',
+                                             'index': 'max_depth'}).update_layout(legend=dict(title="Metrics"))
+            st.plotly_chart(dt_plot_train, use_container_width=True)
+        with col19:
+            dt_plot_val = px.line(results_val_dt,
+                                  x=results_val_dt.index,
+                                  y=['precision', 'accuracy', 'recall', 'F1'],
+                                  template='plotly_dark',
+                                  title="Metrics comparison according to the max_depth - Validation Dataset",
+                                  labels={'value': 'Metric value',
+                                           'index': 'max_depth'}).update_layout(legend=dict(title="Metrics"))
+            st.plotly_chart(dt_plot_val, use_container_width=True)
+        with col20:
+            dt_plot_test = px.line(results_test_dt,
+                                   x=results_test_dt.index,
+                                   y=['precision', 'accuracy', 'recall', 'F1'],
+                                   template='plotly_dark',
+                                   title="Metrics comparison according to the max_depth - Test Dataset",
+                                   labels={'value': 'Metric value',
+                                            'index': 'max_depth'}).update_layout(legend=dict(title="Metrics"))
+            st.plotly_chart(dt_plot_test, use_container_width=True)
 
 
 # ---------------------------------------------------------------
@@ -377,7 +464,6 @@ with tab3:
                 train_plot = px.bar(x=rf_results.index,
                                     y=rf_results['Train'],
                                     color=rf_results.index,
-                                    barmode='overlay',
                                     labels={'x': '', 'y': ''},
                                     template='plotly_dark',
                                     hover_name=rf_results.index)
@@ -405,7 +491,6 @@ with tab3:
                 val_plot = px.bar(x=rf_results.index,
                                   y=rf_results['Validation'],
                                   color=rf_results.index,
-                                  barmode='overlay',
                                   labels={'x': '', 'y': ''},
                                   template='plotly_dark',
                                   hover_name=rf_results.index)
@@ -433,7 +518,6 @@ with tab3:
                 test_plot = px.bar(x=rf_results.index,
                                    y=rf_results['Test'],
                                    color=rf_results.index,
-                                   barmode='overlay',
                                    labels={'x': '', 'y': ''},
                                    template='plotly_dark',
                                    hover_name=rf_results.index)
@@ -441,6 +525,35 @@ with tab3:
                 test_plot.update_layout(showlegend=False)
                 st.plotly_chart(test_plot, use_container_width=True)
 
+    with st.container():
+        col18, col19, col20 = st.columns(3)
+        with col18:
+            rf_plot_train = px.line(results_train_rf,
+                                    x=results_train_rf.index,
+                                    y=['precision', 'accuracy', 'recall', 'F1'],
+                                    template='plotly_dark',
+                                    title="Metrics comparison according to the max_depth - Train Dataset",
+                                    labels={'value': 'Metric value',
+                                             'index': 'max_depth'}).update_layout(legend=dict(title="Metrics"))
+            st.plotly_chart(rf_plot_train, use_container_width=True)
+        with col19:
+            rf_plot_val = px.line(results_val_rf,
+                                  x=results_val_rf.index,
+                                  y=['precision', 'accuracy', 'recall', 'F1'],
+                                  template='plotly_dark',
+                                  title="Metrics comparison according to the max_depth - Validation Dataset",
+                                  labels={'value': 'Metric value',
+                                           'index': 'max_depth'}).update_layout(legend=dict(title="Metrics"))
+            st.plotly_chart(rf_plot_val, use_container_width=True)
+        with col20:
+            rf_plot_test = px.line(results_test_rf,
+                                   x=results_test_rf.index,
+                                   y=['precision', 'accuracy', 'recall', 'F1'],
+                                   template='plotly_dark',
+                                   title="Metrics comparison according to the max_depth - Test Dataset",
+                                   labels={'value': 'Metric value',
+                                            'index': 'max_depth'}).update_layout(legend=dict(title="Metrics"))
+            st.plotly_chart(rf_plot_test, use_container_width=True)
 
 # ---------------------------------------------------------------
 # --------------------- Logistic Regression ---------------------
@@ -513,7 +626,6 @@ with tab4:
                 train_plot = px.bar(x=logreg_results.index,
                                     y=logreg_results['Train'],
                                     color=logreg_results.index,
-                                    barmode='overlay',
                                     labels={'x': '', 'y': ''},
                                     template='plotly_dark',
                                     hover_name=logreg_results.index)
@@ -541,7 +653,6 @@ with tab4:
                 val_plot = px.bar(x=logreg_results.index,
                                   y=logreg_results['Validation'],
                                   color=logreg_results.index,
-                                  barmode='overlay',
                                   labels={'x': '', 'y': ''},
                                   template='plotly_dark',
                                   hover_name=logreg_results.index)
@@ -569,7 +680,6 @@ with tab4:
                 test_plot = px.bar(x=logreg_results.index,
                                    y=logreg_results['Test'],
                                    color=logreg_results.index,
-                                   barmode='overlay',
                                    labels={'x': '', 'y': ''},
                                    template='plotly_dark',
                                    hover_name=logreg_results.index)
@@ -577,6 +687,37 @@ with tab4:
                 test_plot.update_layout(showlegend=False)
                 st.plotly_chart(test_plot, use_container_width=True)
 
+    with st.container():
+        col18, col19, col20 = st.columns(3)
+        with col18:
+            logreg_plot_train = px.line(results_train_logreg,
+                                        x=results_train_logreg.index,
+                                        y=['precision', 'accuracy',
+                                            'recall', 'F1'],
+                                        template='plotly_dark',
+                                        title="Metrics comparison according to the C value - Train Dataset",
+                                        labels={'value': 'Metric value',
+                                                'index': 'C value'}).update_layout(legend=dict(title="Metrics"))
+            st.plotly_chart(logreg_plot_train, use_container_width=True)
+        with col19:
+            logreg_plot_val = px.line(results_val_logreg,
+                                      x=results_val_logreg.index,
+                                      y=['precision', 'accuracy', 'recall', 'F1'],
+                                      template='plotly_dark',
+                                      title="Metrics comparison according to the C value - Validation Dataset",
+                                      labels={'value': 'Metric value',
+                                              'index': 'C value'}).update_layout(legend=dict(title="Metrics"))
+            st.plotly_chart(logreg_plot_val, use_container_width=True)
+        with col20:
+            logreg_plot_test = px.line(results_test_logreg,
+                                       x=results_test_logreg.index,
+                                       y=['precision', 'accuracy',
+                                           'recall', 'F1'],
+                                       template='plotly_dark',
+                                       title="Metrics comparison according to the C value - Test Dataset",
+                                       labels={'value': 'Metric value',
+                                               'index': 'C value'}).update_layout(legend=dict(title="Metrics"))
+            st.plotly_chart(logreg_plot_test, use_container_width=True)
 # ---------------------------------------------------------------
 # --------------------- Model Comparison ---------------------
 # ---------------------------------------------------------------
