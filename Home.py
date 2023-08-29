@@ -42,5 +42,5 @@ st.markdown("""
             
             As all the algorithms are rerun every time the user changes a hyperparameter, it can take a little long to the results be correctly displayed, so please, be patient. 
             
-            If you have any question, suggestion, issue report and critics, please let me know by reaching me through [e-mail](mailto:piatobio@gmail.com) or by [Discord](https://discordapp.com/users/438408418429239296).
+            If you have any question, suggestion, issue report and critics, please let me know by reaching me through [e-mail](mailto:piatobio@gmail.com) or by [Discord](https://discordapp.com/users/438408418429239296) or find me in [LinkedIn](https://www.linkedin.com/in/piatobruno/) or [GitHub](https://github.com/brunopiato/).
             """)
