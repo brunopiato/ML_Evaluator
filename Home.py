@@ -20,14 +20,14 @@ st.sidebar.markdown('#### by Bruno Piato')
 st.markdown("""
             # Machine Learning Evaluator
             
-            This WebApp was developed to bring to life the final essay of the Machine Learning Fundamentals discipline. It is quite common for data science and analytics teams to buidl some essays on the functioning of a few different machine learning algorithms in the pursuit to:
+            This WebApp was developed to bring to life the final essay of the Machine Learning Fundamentals discipline. It is quite common for data science and analytics teams to build some essays on the functioning of a few different machine learning algorithms in the pursuit to:
             - Explore scientifically the algorithms functioning
             - Gain more knowledge and experience about how the algorithms behave
             - Their main hyper-parameters and how they impact the final results
             - Be able to quickly identify the best algorithms to use in each situation
             - Consolidate the studies and learnings through the rational implementation and fine-tuning of several algorithms
             
-            The main goal of the WebApp is to provide a visual implementation of how the different hyperparameters of some of the main machine learning algorithms impact their performance metrics. All the algorithms of each of the three types were trained, validated and tested using the exact same dataset so the observed differences are only due to algorithms functioning and hyperparameter fine-tuning.
+            Its main goal is to provide a visual implementation of how the different hyperparameters of some of the main machine learning algorithms impact their performance metrics. All the algorithms of each of the three types were trained, validated and tested using the exact same dataset so the observed differences are only due to algorithms functioning and hyperparameter fine-tuning.
             
             Here I implemented a few of the ML algorithms we used during the discipline:
             - Classification algorithms:
