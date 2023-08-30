@@ -101,10 +101,10 @@ with tab1:
     st.header("K-Nearest Neighbors Evaluator")
 
     expander_knn = st.expander(
-        'How does a K-Nearest Neighbors Classifier work?')
+        'How does the K-Nearest Neighbors Classifier work?')
     expander_knn.write("""
-                This is a K-Nearest Neighbors Classifier algorithm
-               """)
+                The K-Nearest Neighbors Classifier algorithm is a supervised learning algorithm used to predict the classification of a certain observation based on the training features and the distance between examples. It searches for K nearest neighbors in a n-dimensional space to determine the most probable class of that observation, where K is the number of neighbors that will participate in the determination of the prediction and n is the number of features in the dataset. For it uses the distances between the exemples, the dataset must be encoded so the features are in the same magnitude. The Dimensionality Curse might also be a problem in this kind of algorithm along with the training time.
+                """)
     colA, colB = st.columns(2)
     with colA:
         k_neigh = st.slider(label='Define the numbers of neighbors (k) to be used:',
@@ -254,9 +254,9 @@ with tab1:
 with tab2:
     st.header("Decision Tree Evaluator")
 
-    expander_dt = st.expander('How does a Decision Tree Classifier work?')
+    expander_dt = st.expander('How does the Decision Tree Classifier work?')
     expander_dt.write("""
-                This is a Decision Tree Classifier algorithm
+                The Decision Tree Classifier algorithm is a supervised learning algorithm used to predict the classification of a certain observation based on the binary subdivion of the examples according to training features values. For every subdivion the algorithm tries to reduce the heterogeneity within the formed sub-groups, which is measerud using Gini's Impurity Index, Entropy functions or Information Gain functions focusing on the target variable. The algorithm ceases when it reaches the maximum tree depth ("max_depth"), the lowest impurity index, the maximum leaves per node and a few other user set parameters. Accordingly to the features-values pair encoutered during the training process, new observations will be accomadated in a certain leaf, givind its classification prediction.
                """)
     colA, colB = st.columns(2)
     with colA:
@@ -406,9 +406,9 @@ with tab2:
 with tab3:
     st.header("Random Forest Classifier evaluator")
 
-    expander_rf = st.expander('How does a Random Forest Classifier work?')
+    expander_rf = st.expander('How does the Random Forest Classifier work?')
     expander_rf.write("""
-                This is a Random Forest Classifier algorithm
+                The Random Forest Classifier algorithm is a supervised learning algorithm used to predict the classification of a certain observation based on the consensus obtained by the training of several different Decision Tree algorithms, amplifying the confidence on the predictions. It implements a bootstrap method to generate pseudoreplicates of the dataset to train the trees increasing the variability of the forest, which could be used to calculate the relative importance of each feature. After training n trees from n pseudoreplicates ("n_estimators"), every new observation will be accomodated in a single leaf of each tree and then the mode will be calculated to elect the class prediction.
                """)
     colA, colB = st.columns(2)
     with colA:
@@ -562,9 +562,9 @@ with tab4:
     st.header('Logistic Regression Evaluator')
 
     expander_logreg = st.expander(
-        'How does a Logistic Regression Classifier work?')
+        'How does the Logistic Regression Classifier work?')
     expander_logreg.write("""
-                This is a Logistic Regression Classifier algorithm
+                The Logistic Regression Classifier algorithm is a supervised learning algorithm used to predict the classification of a certain observation based on the logistic function (sigmoid function) to predict its class. It uses the maximum likelihood function to optimize the parameters of the logistic function, which will attribute a value between 0 and 1 to the probability of a certain observation belong to a specific class. A cut threshold can be determined (i.e. 0.5) above which the observation will be classified as class A and bellow which it will be classified as class B, for example. The hyperparameter "C" stands for a regularization parameter, where high values tend to weight more the variables.
                """)
 
     colA, colB, colC = st.columns(3)
