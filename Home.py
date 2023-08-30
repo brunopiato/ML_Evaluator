@@ -27,7 +27,9 @@ st.markdown("""
             - Their main hyper-parameters and how they impact the final results
             - Be able to quickly identify the best algorithms to use in each situation
             - Consolidate the studies and learnings through the rational implementation and fine-tuning of several algorithms
-            
+            """)
+
+st.markdown("""
             Its main goal is to provide a visual implementation of how the different hyperparameters of some of the main machine learning algorithms impact their performance metrics. All the algorithms of each of the three types were trained, validated and tested using the exact same dataset so the observed differences are only due to algorithms functioning and hyperparameter fine-tuning.
             
             Here I implemented a few of the ML algorithms we used during the discipline:
