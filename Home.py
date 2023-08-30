@@ -30,7 +30,7 @@ st.markdown("""
             """)
 
 st.markdown("""
-            Its main goal is to provide a visual implementation of how the different hyperparameters of some of the main machine learning algorithms impact their performance metrics. All the algorithms of each of the three types were trained, validated and tested using the exact same dataset so the observed differences are only due to algorithms functioning and hyperparameter fine-tuning.
+            The main goal here is to provide a visual implementation of how the different hyperparameters of some of the main machine learning algorithms impact their performance metrics. All the algorithms of each of the three types were trained, validated and tested using the exact same dataset so the observed differences are only due to algorithms functioning and hyperparameter fine-tuning.
             
             Here I implemented a few of the ML algorithms we used during the discipline:
             - Classification algorithms:
@@ -49,8 +49,6 @@ st.markdown("""
                 - Affinity Propagation
 
             At the last tab of each page there is a model comparison of the algorithms as the user set them. 
-            
-            As all the algorithms are rerun every time the user changes a hyperparameter, it can take a little long to the results be correctly displayed, so please, be patient. 
             
             If you have any question, suggestion, issue report and critics, please let me know by reaching me through [e-mail](mailto:piatobio@gmail.com) or by [Discord](https://discordapp.com/users/438408418429239296) or find me in [LinkedIn](https://www.linkedin.com/in/piatobruno/) or [GitHub](https://github.com/brunopiato/).
             """)

@@ -60,9 +60,9 @@ logreg_concat_results = pd.concat(
     [results_train_logreg, results_val_logreg, results_test_logreg], axis=0)
 
 
-##########################################################################################################
-#################################### STREAMLIT PAGE ######################################################
-##########################################################################################################
+########################################################################
+########################## STREAMLIT PAGE ##############################
+########################################################################
 st.set_page_config(page_title='Classification Models',
                    page_icon='🤖',
                    layout='wide')
@@ -74,6 +74,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(
 # -------------- Sidebar --------------------
 st.sidebar.markdown('# Classification Models Evaluation Tool')
 st.sidebar.markdown('#### by Bruno Piato')
+
 
 # ---------------------------------------------------------------
 # --------------------- K-Nearest Neighbors ---------------------
@@ -88,18 +89,26 @@ with tab1:
                 """)
     colA, colB = st.columns(2)
     with colA:
+        st.markdown(
+            '*Please note that all the plot y-axes range from 0.5 to 1.0.*')
         k_neigh = st.slider(label='Define the numbers of neighbors (k) to be used:',
                             min_value=1,
                             max_value=15,
                             value=5)
+
     with colB:
         st.header('')
 
-    # -------------- Printing in the page --------------------
+    # -------------- Preparing the data --------------------
     knn_train_filtered = results_train_knn[results_train_knn['k_value'] == k_neigh]
     knn_val_filtered = results_val_knn[results_val_knn['k_value'] == k_neigh]
     knn_test_filtered = results_test_knn[results_test_knn['k_value'] == k_neigh]
+    knn_aux = knn_concat_results[knn_concat_results['k_value'] == k_neigh].loc[:, [
+        'precision', 'accuracy', 'recall', 'F1']]
+    knn_aux.index = ['train', 'val', 'test']
+    knn_aux = knn_aux.T
 
+    # -------------- Ploting the page --------------------
     with st.container():
         col1, col2 = st.columns(2)
         # with col1:
@@ -128,6 +137,17 @@ with tab1:
                     st.metric(label='F1-Score',
                               value=round(knn_train_filtered['F1'], 3))
 
+                knn_train_plot = px.bar(data_frame=knn_aux,
+                                        x=knn_aux.index,
+                                        y=knn_aux['train'],
+                                        color=knn_aux.index,
+                                        template='plotly_dark',
+                                        labels={'train': 'Score',
+                                                'index': 'Metric'})
+                knn_train_plot.update_yaxes(range=[0.5, 1.0])
+                knn_train_plot.update_layout(showlegend=False)
+                st.plotly_chart(knn_train_plot, use_container_width=True)
+
         with col4:
             with st.container():
                 st.title('Validation dataset')
@@ -145,6 +165,17 @@ with tab1:
                     st.metric(label='F1-Score',
                               value=round(knn_val_filtered['F1'], 3))
 
+                knn_val_plot = px.bar(data_frame=knn_aux,
+                                      x=knn_aux.index,
+                                      y=knn_aux['val'],
+                                      color=knn_aux.index,
+                                      template='plotly_dark',
+                                      labels={'val': 'Score',
+                                              'index': 'Metric'})
+                knn_val_plot.update_yaxes(range=[0.5, 1.0])
+                knn_val_plot.update_layout(showlegend=False)
+                st.plotly_chart(knn_val_plot, use_container_width=True)
+
         with col5:
             with st.container():
                 st.title('Test dataset')
@@ -161,6 +192,17 @@ with tab1:
                 with col17:
                     st.metric(label='F1-Score',
                               value=round(knn_test_filtered['F1'], 3))
+
+                knn_test_plot = px.bar(data_frame=knn_aux,
+                                       x=knn_aux.index,
+                                       y=knn_aux['test'],
+                                       color=knn_aux.index,
+                                       template='plotly_dark',
+                                       labels={'test': 'Score',
+                                                'index': 'Metric'})
+                knn_test_plot.update_yaxes(range=[0.5, 1.0])
+                knn_test_plot.update_layout(showlegend=False)
+                st.plotly_chart(knn_test_plot, use_container_width=True)
 
     with st.container():
         col18, col19, col20 = st.columns(3)
@@ -205,6 +247,8 @@ with tab2:
                """)
     colA, colB = st.columns(2)
     with colA:
+        st.markdown(
+            '*Please note that all the plot y-axes range from 0.5 to 1.0.*')
         m_treedepth = st.slider(label='Define maximum tree depth value:',
                                 min_value=5,
                                 max_value=100,
@@ -213,7 +257,17 @@ with tab2:
     with colB:
         st.header('')
 
-    # -------------- Printing in the page --------------------
+    # -------------- Preparing the data --------------------
+    dt_train_filtered = results_train_dt[results_train_dt['max_depth'] == m_treedepth]
+    dt_val_filtered = results_val_dt[results_val_dt['max_depth']
+                                     == m_treedepth]
+    dt_test_filtered = results_test_dt[results_test_dt['max_depth'] == m_treedepth]
+    dt_aux = dt_concat_results[dt_concat_results['max_depth'] == m_treedepth].loc[:, [
+        'precision', 'accuracy', 'recall', 'F1']]
+    dt_aux.index = ['train', 'val', 'test']
+    dt_aux = dt_aux.T
+
+    # -------------- Ploting the page --------------------
 
     dt_train_filtered = results_train_dt[results_train_dt['max_depth'] == m_treedepth]
     dt_val_filtered = results_val_dt[results_val_dt['max_depth']
@@ -248,6 +302,17 @@ with tab2:
                     st.metric(label='F1-Score',
                               value=round(dt_train_filtered['F1'], 3))
 
+                dt_train_plot = px.bar(data_frame=dt_aux,
+                                       x=dt_aux.index,
+                                       y=dt_aux['train'],
+                                       color=dt_aux.index,
+                                       template='plotly_dark',
+                                       labels={'train': 'Score',
+                                                'index': 'Metric'})
+                dt_train_plot.update_yaxes(range=[0.5, 1.0])
+                dt_train_plot.update_layout(showlegend=False)
+                st.plotly_chart(dt_train_plot, use_container_width=True)
+
         with col4:
             with st.container():
                 st.title('Validation dataset')
@@ -265,6 +330,17 @@ with tab2:
                     st.metric(label='F1-Score',
                               value=round(dt_val_filtered['F1'], 3))
 
+                dt_val_plot = px.bar(data_frame=dt_aux,
+                                     x=dt_aux.index,
+                                     y=dt_aux['val'],
+                                     color=dt_aux.index,
+                                     template='plotly_dark',
+                                     labels={'val': 'Score',
+                                             'index': 'Metric'})
+                dt_val_plot.update_yaxes(range=[0.5, 1.0])
+                dt_val_plot.update_layout(showlegend=False)
+                st.plotly_chart(dt_val_plot, use_container_width=True)
+
         with col5:
             with st.container():
                 st.title('Test dataset')
@@ -281,6 +357,17 @@ with tab2:
                 with col17:
                     st.metric(label='F1-Score',
                               value=round(dt_test_filtered['F1'], 3))
+
+                dt_test_plot = px.bar(data_frame=dt_aux,
+                                      x=dt_aux.index,
+                                      y=dt_aux['test'],
+                                      color=dt_aux.index,
+                                      template='plotly_dark',
+                                      labels={'test': 'Score',
+                                              'index': 'Metric'})
+                dt_test_plot.update_yaxes(range=[0.5, 1.0])
+                dt_test_plot.update_layout(showlegend=False)
+                st.plotly_chart(dt_test_plot, use_container_width=True)
 
     with st.container():
         col18, col19, col20 = st.columns(3)
@@ -315,7 +402,7 @@ with tab2:
 
 
 # ---------------------------------------------------------------
-# --------------------- Random Forest ---------------------
+# --------------------- Random Forest ---------------------------
 # ---------------------------------------------------------------
 with tab3:
     st.header("Random Forest Classifier evaluator")
@@ -326,6 +413,8 @@ with tab3:
                """)
     colA, colB = st.columns(2)
     with colA:
+        st.markdown(
+            '*Please note that all the plot y-axes range from 0.5 to 1.0.*')
         m_depth = st.slider(label='Define maximum depth value:',
                             min_value=5,
                             max_value=100,
@@ -338,7 +427,16 @@ with tab3:
         #                  max_value=100,
         #                  value=50)
 
-    # -------------- Printing in the page --------------------
+    # -------------- Preparing the data --------------------
+    rf_train_filtered = results_train_rf[results_train_rf['max_depth'] == m_depth]
+    rf_val_filtered = results_val_rf[results_val_rf['max_depth'] == m_depth]
+    rf_test_filtered = results_test_rf[results_test_rf['max_depth'] == m_depth]
+    rf_aux = rf_concat_results[rf_concat_results['max_depth'] == m_depth].loc[:, [
+        'precision', 'accuracy', 'recall', 'F1']]
+    rf_aux.index = ['train', 'val', 'test']
+    rf_aux = rf_aux.T
+
+    # -------------- Ploting the page --------------------
     # [TODO] Add a filter for the number of estimator trees. To do so I need to rerun the model with a nested for loop
     rf_train_filtered = results_train_rf[results_train_rf['max_depth'] == m_depth]
     rf_val_filtered = results_val_rf[results_val_rf['max_depth']
@@ -373,6 +471,17 @@ with tab3:
                     st.metric(label='F1-Score',
                               value=round(rf_train_filtered['F1'], 3))
 
+                rf_train_plot = px.bar(data_frame=rf_aux,
+                                       x=rf_aux.index,
+                                       y=rf_aux['train'],
+                                       color=rf_aux.index,
+                                       template='plotly_dark',
+                                       labels={'train': 'Score',
+                                                'index': 'Metric'})
+                rf_train_plot.update_yaxes(range=[0.5, 1.0])
+                rf_train_plot.update_layout(showlegend=False)
+                st.plotly_chart(rf_train_plot, use_container_width=True)
+
         with col4:
             with st.container():
                 st.title('Validation dataset')
@@ -390,6 +499,17 @@ with tab3:
                     st.metric(label='F1-Score',
                               value=round(rf_val_filtered['F1'], 3))
 
+                rf_val_plot = px.bar(data_frame=rf_aux,
+                                     x=rf_aux.index,
+                                     y=rf_aux['val'],
+                                     color=rf_aux.index,
+                                     template='plotly_dark',
+                                     labels={'val': 'Score',
+                                             'index': 'Metric'})
+                rf_val_plot.update_yaxes(range=[0.5, 1.0])
+                rf_val_plot.update_layout(showlegend=False)
+                st.plotly_chart(rf_val_plot, use_container_width=True)
+
         with col5:
             with st.container():
                 st.title('Test dataset')
@@ -406,6 +526,17 @@ with tab3:
                 with col17:
                     st.metric(label='F1-Score',
                               value=round(rf_test_filtered['F1'], 3))
+
+                rf_test_plot = px.bar(data_frame=rf_aux,
+                                      x=rf_aux.index,
+                                      y=rf_aux['test'],
+                                      color=rf_aux.index,
+                                      template='plotly_dark',
+                                      labels={'test': 'Score',
+                                              'index': 'Metric'})
+                rf_test_plot.update_yaxes(range=[0.5, 1.0])
+                rf_test_plot.update_layout(showlegend=False)
+                st.plotly_chart(rf_test_plot, use_container_width=True)
 
     with st.container():
         col18, col19, col20 = st.columns(3)
@@ -456,6 +587,8 @@ with tab4:
 
     colA, colB, colC = st.columns(3)
     with colA:
+        st.markdown(
+            '*Please note that all the plot y-axes range from 0.5 to 1.0.*')
         C_val = st.slider(label='Define the value for C:',
                           step=0.1,
                           min_value=0.1,
@@ -472,7 +605,16 @@ with tab4:
         # s_type = st.selectbox(label='Select the solver type:',
         #                       options=('newton-cholesky', 'lbfgs', 'liblinear', 'newton-cg', 'sag', 'saga'))
 
-    # -------------- Printing in the page --------------------
+    # -------------- Preparing the data --------------------
+    logreg_train_filtered = results_train_logreg[results_train_logreg['C_value'] == C_val]
+    logreg_val_filtered = results_val_logreg[results_val_logreg['C_value'] == C_val]
+    logreg_test_filtered = results_test_logreg[results_test_logreg['C_value'] == C_val]
+    logreg_aux = logreg_concat_results[logreg_concat_results['C_value'] == C_val].loc[:, [
+        'precision', 'accuracy', 'recall', 'F1']]
+    logreg_aux.index = ['train', 'val', 'test']
+    logreg_aux = logreg_aux.T
+
+    # -------------- Ploting the page --------------------
 
     logreg_train_filtered = results_train_logreg[results_train_logreg['C_value'] == C_val]
     logreg_val_filtered = results_val_logreg[results_val_logreg['C_value']
@@ -507,6 +649,17 @@ with tab4:
                     st.metric(label='F1-Score',
                               value=round(logreg_train_filtered['F1'], 3))
 
+                logreg_train_plot = px.bar(data_frame=logreg_aux,
+                                           x=logreg_aux.index,
+                                           y=logreg_aux['train'],
+                                           color=logreg_aux.index,
+                                           template='plotly_dark',
+                                           labels={'train': 'Score',
+                                                   'index': 'Metric'})
+                logreg_train_plot.update_yaxes(range=[0.5, 1.0])
+                logreg_train_plot.update_layout(showlegend=False)
+                st.plotly_chart(logreg_train_plot, use_container_width=True)
+
         with col4:
             with st.container():
                 st.title('Validation dataset')
@@ -524,6 +677,17 @@ with tab4:
                     st.metric(label='F1-Score',
                               value=round(logreg_val_filtered['F1'], 3))
 
+                logreg_val_plot = px.bar(data_frame=logreg_aux,
+                                         x=logreg_aux.index,
+                                         y=logreg_aux['val'],
+                                         color=logreg_aux.index,
+                                         template='plotly_dark',
+                                         labels={'val': 'Score',
+                                                 'index': 'Metric'})
+                logreg_val_plot.update_yaxes(range=[0.5, 1.0])
+                logreg_val_plot.update_layout(showlegend=False)
+                st.plotly_chart(logreg_val_plot, use_container_width=True)
+
         with col5:
             with st.container():
                 st.title('Test dataset')
@@ -540,6 +704,17 @@ with tab4:
                 with col17:
                     st.metric(label='F1-Score',
                               value=round(logreg_test_filtered['F1'], 3))
+
+                logreg_test_plot = px.bar(data_frame=logreg_aux,
+                                          x=logreg_aux.index,
+                                          y=logreg_aux['test'],
+                                          color=logreg_aux.index,
+                                          template='plotly_dark',
+                                          labels={'test': 'Score',
+                                                  'index': 'Metric'})
+                logreg_test_plot.update_yaxes(range=[0.5, 1.0])
+                logreg_test_plot.update_layout(showlegend=False)
+                st.plotly_chart(logreg_test_plot, use_container_width=True)
 
     with st.container():
         col18, col19, col20 = st.columns(3)
