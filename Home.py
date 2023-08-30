@@ -21,6 +21,7 @@ st.markdown("""
             # Machine Learning Evaluator
             
             This WebApp was developed to bring to life the final essay of the Machine Learning Fundamentals discipline. It is quite common for data science and analytics teams to build some essays on the functioning of a few different machine learning algorithms in the pursuit to:
+            
             - Explore scientifically the algorithms functioning
             - Gain more knowledge and experience about how the algorithms behave
             - Their main hyper-parameters and how they impact the final results
