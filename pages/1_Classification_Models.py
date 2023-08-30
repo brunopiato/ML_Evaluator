@@ -42,7 +42,7 @@ results_val_logreg = pd.read_csv(
 results_test_logreg = pd.read_csv(
     './data/classif/results/logreg_results_test.csv', low_memory=False, index_col=0)
 
-# MERGING DATAFRAMES
+# CONCATANATING DATAFRAMES
 # KNN
 knn_concat_results = pd.concat(
     [results_train_knn, results_val_knn, results_test_knn], axis=0)
@@ -456,17 +456,17 @@ with tab4:
 
     colA, colB, colC = st.columns(3)
     with colA:
-        st.title('')
-        # m_iter = st.slider(label='Define maximum iterations:',
-        #                    min_value=1,
-        #                    max_value=200,
-        #                    value=100)
-    with colB:
         C_val = st.slider(label='Define the value for C:',
                           step=0.1,
                           min_value=0.1,
                           max_value=1.0,
                           value=1.0)
+    with colB:
+        st.title('')
+        # m_iter = st.slider(label='Define maximum iterations:',
+        #                    min_value=1,
+        #                    max_value=200,
+        #                    value=100)
     with colC:
         st.title('')
         # s_type = st.selectbox(label='Select the solver type:',
@@ -578,7 +578,7 @@ with tab4:
 # --------------------- Model Comparison ---------------------
 # ---------------------------------------------------------------
 with tab5:
-    expander_metrics = st.expander("Whats does these metrics mean?")
+    expander_metrics = st.expander("Whats do these metrics mean?")
     expander_metrics.write(r"""
                            **Precision**: is the percentage of correct predictions of a certain classe an algorithm made given the number of times it predicted that class. Based on the Confusion Matrix it is the number of True Positives (TP) in relation to the number of Positives (both True and False, TP and FP). 
                            
@@ -603,11 +603,14 @@ with tab5:
                            $F1Score = \frac{2}{\frac{1}{Precision} + \frac{1}{Recall}}$
                            """)
 
-    st.header('K-Nearest Neighbors')
-    # st.table(knn_results.T)
-    st.header('Decision Trees')
-    # st.table(dt_results.T)
-    st.header('Random Forest')
-    # st.table(rf_results.T)
-    st.header('Logistic Regression')
-    # st.table(logreg_results.T)
+    st.markdown('## K-Nearest Neighbors')
+    st.table(knn_concat_results[knn_concat_results['k_value'] == k_neigh])
+
+    st.markdown('## Decision Trees')
+    st.table(dt_concat_results[dt_concat_results['max_depth'] == m_treedepth])
+
+    st.markdown('## Random Forest')
+    st.table(rf_concat_results[rf_concat_results['max_depth'] == m_depth])
+
+    st.markdown('## Logistic Regression')
+    st.table(logreg_concat_results[logreg_concat_results['C_value'] == C_val])
