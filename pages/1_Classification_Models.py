@@ -390,7 +390,6 @@ with tab2:
                                            'index': 'max_depth'}).update_layout(legend=dict(title="Metrics"))
             st.plotly_chart(dt_plot_val, use_container_width=True)
         with col20:
-            st.title('')
             dt_plot_test = px.line(results_test_dt,
                                    x=results_test_dt.index,
                                    y=['precision', 'accuracy', 'recall', 'F1'],
