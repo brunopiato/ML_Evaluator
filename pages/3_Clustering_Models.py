@@ -74,7 +74,7 @@ with tab2:
         with col1:
             affprop_preference = st.slider(label='Define preference value:',
                                            min_value=-100,
-                                           max_value=2,
+                                           max_value=-2,
                                            value=-50,
                                            step=2)
             affprop_filtered = affprop_result[affprop_result['preference']
